@@ -17,6 +17,15 @@ jobs:
       - id: checkout
         uses: actions/checkout@v2  
 
+      - id: "build treasuremap docker image"
+        name: "gcr.io/cloud-builders/docker"
+        timeout: 600s
+        args:
+          - "build"
+          - "-t"
+          - "eu.gcr.io/$PROJECT_ID/app-my-first-api:$SHORT_SHA"
+          - "."  
+
   
 
       
