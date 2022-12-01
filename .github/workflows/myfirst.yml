@@ -1,8 +1,8 @@
 name: My First github action
 on: 
   push:
-    branches:
-      - main
+    branches: ["main"]
+      
 jobs:
   new_push:
     runs-on: ubuntu-latest
