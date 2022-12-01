@@ -25,6 +25,6 @@ jobs:
           project_id: ingka-native-ikealabs-dev
           image_name: firstapiongcp
         #image_tag: test-${{ github.sha }}, ${{ github.sha }}
-          dockerfile: ./test/Dockerfile.test
-          context: ./test
+          dockerfile: Dockerfile
+          context: '.'
           target: build
