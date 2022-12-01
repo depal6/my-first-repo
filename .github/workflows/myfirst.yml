@@ -1,0 +1,52 @@
+name: My First github action
+on: push
+#env:
+ # PROJECT_ID: 'ingka-native-ikealabs-dev'
+
+jobs:
+  new_push:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - id: checkout
+      uses: actions/checkout@v3
+
+    - id: "build treasuremap docker image"
+      name: "gcr.io/cloud-builders/docker"
+      timeout: 600s
+      args:
+        - "build"
+        - "-t"
+        - "eu.gcr.io/$PROJECT_ID/app-my-first-api:$SHORT_SHA"
+        - "."
+
+    - id: "push Sample app to GCP Container Registry"
+      name: "gcr.io/cloud-builders/docker"
+      timeout: 600s
+      args:
+        - "push"
+        - "eu.gcr.io/$PROJECT_ID/app-my-first-api:$SHORT_SHA"
+
+   - id: "deploy Sample map on Cloud Run"
+     name: "gcr.io/cloud-builders/gcloud"
+     timeout: 600s
+     args:
+       - "run"
+       - "deploy"
+       - "concat-cloud-fun"
+       - "--platform"
+       - "managed"
+       - "--image"
+       - "eu.gcr.io/$PROJECT_ID/app-my-first-api:$SHORT_SHA"
+       - "--region"
+       - "europe-west1"
+       - "--memory"
+       - "1Gi"
+       - "--cpu"
+       - "2"
+       - "--allow-unauthenticated"
+
+  
+
+      
