@@ -1,14 +1,9 @@
 name: My First github action
 on: push
-#env:
- # PROJECT_ID: 'ingka-native-ikealabs-dev'
-
 jobs:
   new_push:
     runs-on: ubuntu-latest
-
     steps:
-
     - id: checkout
       uses: actions/checkout@v3
 
