@@ -23,8 +23,8 @@ build-and-push-to-gcr-without-gcloud-auth-action:
         gcloud_service_key: "${{ secrets.JSON_GCLOUD_SERVICE_ACCOUNT_JSON }}"
         registry: gcr.io
         project_id: ingka-native-ikealabs-dev
-          image_name: firstapiongcp-by-push-to-gcr-2
-          #image_tag: test-${{ github.sha }}, ${{ github.sha }}
-          dockerfile: ./test/Dockerfile.test
-          context: ./test
-          target: build
+        image_name: firstapiongcp-by-push-to-gcr-2
+        #image_tag: test-${{ github.sha }}, ${{ github.sha }}
+        dockerfile: ./test/Dockerfile.test
+        context: ./test
+        target: build
