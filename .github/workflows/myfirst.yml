@@ -12,19 +12,19 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # example with gcloud service account key, except using google-github-actions/auth step. the login is handled by this action 
-build-and-push-to-gcr-without-gcloud-auth-action:
-  name: Build & push - without gcloud auth action
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v3
-    - name: Building and pushing the image
-      uses: ./
-      with:
-        gcloud_service_key: "${{ secrets.JSON_GCLOUD_SERVICE_ACCOUNT_JSON }}"
-        registry: gcr.io
-        project_id: ingka-native-ikealabs-dev
-        image_name: firstapiongcp
+  build-and-push-to-gcr-without-gcloud-auth-action:
+    name: Build & push - without gcloud auth action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Building and pushing the image
+        uses: ./
+        with:
+          gcloud_service_key: "${{ secrets.JSON_GCLOUD_SERVICE_ACCOUNT_JSON }}"
+          registry: gcr.io
+          project_id: ingka-native-ikealabs-dev
+          image_name: firstapiongcp
         #image_tag: test-${{ github.sha }}, ${{ github.sha }}
-        dockerfile: ./test/Dockerfile.test
-        context: ./test
-        target: build
+          dockerfile: ./test/Dockerfile.test
+          context: ./test
+          target: build
