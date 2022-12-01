@@ -1,48 +1,21 @@
+# This is a basic workflow to help you get started with Actions
+
 name: My First github action
-on: 
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: ["main"]   
+    branches:
+      - main
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   new_push:
     runs-on: ubuntu-latest
     steps:
-    - id: checkout
-      uses: actions/checkout@v3
-
-    - id: "build treasuremap docker image"
-      name: "gcr.io/cloud-builders/docker"
-      timeout: 600s
-      args:
-        - "build"
-        - "-t"
-        - "eu.gcr.io/$PROJECT_ID/app-my-first-api:$SHORT_SHA"
-        - "."
-
-    - id: "push Sample app to GCP Container Registry"
-      name: "gcr.io/cloud-builders/docker"
-      timeout: 600s
-      args:
-        - "push"
-        - "eu.gcr.io/$PROJECT_ID/app-my-first-api:$SHORT_SHA"
-
-   - id: "deploy Sample map on Cloud Run"
-     name: "gcr.io/cloud-builders/gcloud"
-     timeout: 600s
-     args:
-       - "run"
-       - "deploy"
-       - "concat-cloud-fun"
-       - "--platform"
-       - "managed"
-       - "--image"
-       - "eu.gcr.io/$PROJECT_ID/app-my-first-api:$SHORT_SHA"
-       - "--region"
-       - "europe-west1"
-       - "--memory"
-       - "1Gi"
-       - "--cpu"
-       - "2"
-       - "--allow-unauthenticated"
+    #- id: checkout
+      - uses: actions/checkout@v2  
 
   
 
