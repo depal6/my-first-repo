@@ -7,8 +7,8 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # example with gcloud service account key, except using google-github-actions/auth step. the login is handled by this action 
-  build-and-push-to-gcr-without-gcloud-auth-action:
-    name : Build & push - without gcloud auth action
+  job-id:
+    name : on push to git
     runs-on: ubuntu-latest
     
     steps:
