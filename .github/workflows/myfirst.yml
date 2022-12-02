@@ -8,7 +8,7 @@ on:
 jobs:
   # example with gcloud service account key, except using google-github-actions/auth step. the login is handled by this action 
   job-id:
-    name : on push to git
+    name : on push to github
     runs-on: ubuntu-latest
     
     steps:
