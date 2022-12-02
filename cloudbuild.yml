@@ -1,0 +1,36 @@
+steps:
+
+  - id: "build docker image"
+    name: "gcr.io/cloud-builders/docker"
+    timeout: 600s
+    args:
+      - "build"
+      - "-t"
+      - "eu.gcr.io/$PROJECT_ID/app-indiana-deepapalabhavi:$SHORT_SHA"
+      - "."
+
+  - id: "push Sample app to GCP Container Registry"
+    name: "gcr.io/cloud-builders/docker"
+    timeout: 600s
+    args:
+      - "push"
+      - "eu.gcr.io/$PROJECT_ID/app-my-first-api:$SHORT_SHA"
+
+  - id: "deploy Sample app on Cloud Run"
+    name: "gcr.io/cloud-builders/gcloud"
+    timeout: 600s
+    args:
+      - "run"
+      - "deploy"
+      - "concat-cloud-fun"
+      - "--platform"
+      - "managed"
+      - "--image"
+      - "eu.gcr.io/$PROJECT_ID/app-my-first-api:$SHORT_SHA"
+      - "--region"
+      - "europe-west1"
+      - "--memory"
+      - "1Gi"
+      - "--cpu"
+      - "2"
+      - "--allow-unauthenticated"
