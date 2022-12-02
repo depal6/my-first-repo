@@ -1,0 +1,36 @@
+steps:
+
+  - id: "build docker image"
+    name: "gcr.io/cloud-builders/docker"
+    timeout: 600s
+    args:
+      - "build"
+      - "-t"
+      - "eu.gcr.io/ingka-native-ikealabs-dev/app-indiana-deepapalabhavi:1.0.0"
+      - "."
+
+  - id: "push Sample app to GCP Container Registry"
+    name: "gcr.io/cloud-builders/docker"
+    timeout: 600s
+    args:
+      - "push"
+      - "eu.gcr.io/ingka-native-ikealabs-dev/app-my-first-api:1.0.0"
+
+  - id: "deploy Sample app on Cloud Run"
+    name: "gcr.io/cloud-builders/gcloud"
+    timeout: 600s
+    args:
+      - "run"
+      - "deploy"
+      - "concat-cloud-fun"
+      - "--platform"
+      - "managed"
+      - "--image"
+      - "eu.gcr.io/ingka-native-ikealabs-dev/app-my-first-api:1.0.0"
+      - "--region"
+      - "europe-west1"
+      - "--memory"
+      - "1Gi"
+      - "--cpu"
+      - "2"
+      - "--allow-unauthenticated"
