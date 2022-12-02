@@ -6,7 +6,7 @@ steps:
     args:
       - "build"
       - "-t"
-      - "eu.gcr.io/ingka-native-ikealabs-dev/app-indiana-deepapalabhavi:1.0.0"
+      - "eu.gcr.io/ingka-native-ikealabs-dev/app-my-first-api:1.0.0"
       - "."
 
   - id: "push Sample app to GCP Container Registry"
